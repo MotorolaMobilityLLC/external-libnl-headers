@@ -28,6 +28,7 @@ LOCAL_SRC_FILES :=  lib/cache.c \
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/include
 LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/include
+LOCAL_CFLAGS += -Wno-unused-parameter
 LOCAL_MODULE := libnl
 
 include $(BUILD_STATIC_LIBRARY)
