@@ -24,19 +24,18 @@
 /* leave room for NETLINK_DM (DM Events) */
 #define NETLINK_SCSITRANSPORT	18	/* SCSI Transports */
 #define NETLINK_ECRYPTFS	19
+#define NETLINK_RDMA		20
 
 #define MAX_LINKS 32		
 
-struct sockaddr_nl
-{
+struct sockaddr_nl {
 	sa_family_t	nl_family;	/* AF_NETLINK	*/
 	unsigned short	nl_pad;		/* zero		*/
 	__u32		nl_pid;		/* port ID	*/
        	__u32		nl_groups;	/* multicast groups mask */
 };
 
-struct nlmsghdr
-{
+struct nlmsghdr {
 	__u32		nlmsg_len;	/* Length of message including header */
 	__u16		nlmsg_type;	/* Message content */
 	__u16		nlmsg_flags;	/* Additional flags */
@@ -50,6 +49,7 @@ struct nlmsghdr
 #define NLM_F_MULTI		2	/* Multipart message, terminated by NLMSG_DONE */
 #define NLM_F_ACK		4	/* Reply with ack, with zero or error code */
 #define NLM_F_ECHO		8	/* Echo this request 		*/
+#define NLM_F_DUMP_INTR		16	/* Dump was inconsistent due to sequence change */
 
 /* Modifiers to GET request */
 #define NLM_F_ROOT	0x100	/* specify tree	root	*/
@@ -72,7 +72,7 @@ struct nlmsghdr
    Check		NLM_F_EXCL
  */
 
-#define NLMSG_ALIGNTO	4
+#define NLMSG_ALIGNTO	4U
 #define NLMSG_ALIGN(len) ( ((len)+NLMSG_ALIGNTO-1) & ~(NLMSG_ALIGNTO-1) )
 #define NLMSG_HDRLEN	 ((int) NLMSG_ALIGN(sizeof(struct nlmsghdr)))
 #define NLMSG_LENGTH(len) ((len)+NLMSG_ALIGN(NLMSG_HDRLEN))
@@ -92,8 +92,7 @@ struct nlmsghdr
 
 #define NLMSG_MIN_TYPE		0x10	/* < 0x10: reserved control messages */
 
-struct nlmsgerr
-{
+struct nlmsgerr {
 	int		error;
 	struct nlmsghdr msg;
 };
@@ -101,9 +100,10 @@ struct nlmsgerr
 #define NETLINK_ADD_MEMBERSHIP	1
 #define NETLINK_DROP_MEMBERSHIP	2
 #define NETLINK_PKTINFO		3
+#define NETLINK_BROADCAST_ERROR	4
+#define NETLINK_NO_ENOBUFS	5
 
-struct nl_pktinfo
-{
+struct nl_pktinfo {
 	__u32	group;
 };
 
@@ -123,8 +123,7 @@ enum {
  *  <-------------- nlattr->nla_len -------------->
  */
 
-struct nlattr
-{
+struct nlattr {
 	__u16           nla_len;
 	__u16           nla_type;
 };
