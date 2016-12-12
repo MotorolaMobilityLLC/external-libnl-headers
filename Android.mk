@@ -5,7 +5,6 @@ include $(CLEAR_VARS)
 LOCAL_SRC_FILES :=  lib/cache.c \
 	lib/data.c \
 	lib/nl.c \
-	lib/doc.c \
 	lib/cache_mngr.c \
 	lib/addr.c \
 	lib/socket.c \
@@ -24,11 +23,15 @@ LOCAL_SRC_FILES :=  lib/cache.c \
 	lib/route/rtnl.c \
 	lib/route/route_utils.c \
 	lib/netfilter/nfnl.c \
-	lib/error.c
+	lib/error.c \
+	lib/version.c \
+	lib/hash.c \
+	lib/hashtable.c
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/include
 LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/include
-LOCAL_CFLAGS += -D_BSD_SOURCE -Wno-unused-parameter
+LOCAL_CFLAGS += -D_BSD_SOURCE -Wno-unused-parameter \
+	-UNDEBUG -DSYSCONFDIR="\"/etc/libnl\""
 LOCAL_MODULE := libnl
 
 include $(BUILD_STATIC_LIBRARY)
