@@ -30,8 +30,9 @@ LOCAL_SRC_FILES :=  lib/cache.c \
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/include $(LOCAL_PATH)/include/linux-private
 LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/include
-LOCAL_CFLAGS += -D_BSD_SOURCE -Wno-unused-parameter \
-	-UNDEBUG -DSYSCONFDIR="\"/etc/libnl\""
+LOCAL_CFLAGS += -D_BSD_SOURCE -Wno-unused-parameter -Wno-sign-compare \
+	-Wno-missing-field-initializers -Wno-tautological-compare \
+	-Wno-pointer-arith -UNDEBUG -D_GNU_SOURCE -DSYSCONFDIR="\"/etc/libnl\""
 LOCAL_MODULE := libnl
 
 include $(BUILD_STATIC_LIBRARY)
