@@ -28,7 +28,7 @@ LOCAL_SRC_FILES :=  lib/cache.c \
 	lib/hash.c \
 	lib/hashtable.c
 
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/include
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/include $(LOCAL_PATH)/include/linux-private
 LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/include
 LOCAL_CFLAGS += -D_BSD_SOURCE -Wno-unused-parameter \
 	-UNDEBUG -DSYSCONFDIR="\"/etc/libnl\""
