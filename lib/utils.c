@@ -489,6 +489,7 @@ int nl_get_psched_hz(void)
  */
 uint32_t nl_us2ticks(uint32_t us)
 {
+	get_psched_settings();
 	return us * ticks_per_usec;
 }
 
@@ -500,6 +501,7 @@ uint32_t nl_us2ticks(uint32_t us)
  */
 uint32_t nl_ticks2us(uint32_t ticks)
 {
+	get_psched_settings();
 	return ticks / ticks_per_usec;
 }
 
