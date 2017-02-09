@@ -403,11 +403,15 @@ static double ticks_per_usec = 1.0f;
  * Supports the environment variables:
  *   PROC_NET_PSCHED  - may point to psched file in /proc
  *   PROC_ROOT        - may point to /proc fs */ 
-static void __init get_psched_settings(void)
+static void get_psched_settings(void)
 {
 	char name[FILENAME_MAX];
 	FILE *fd;
 	int got_hz = 0;
+	static int initialized = 0;
+	if (initialized == 1) {
+		return;
+	}
 
 	if (getenv("HZ")) {
 		long hz = strtol(getenv("HZ"), NULL, 0);
@@ -456,6 +460,7 @@ static void __init get_psched_settings(void)
 			fclose(fd);
 		}
 	}
+	initialized = 1;
 }
 
 
@@ -464,6 +469,7 @@ static void __init get_psched_settings(void)
  */
 int nl_get_user_hz(void)
 {
+	get_psched_settings();
 	return user_hz;
 }
 
@@ -472,6 +478,7 @@ int nl_get_user_hz(void)
  */
 int nl_get_psched_hz(void)
 {
+	get_psched_settings();
 	return psched_hz;
 }
 
