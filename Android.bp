@@ -1,6 +1,7 @@
 
 cc_library {
     name: "libnl",
+    vendor_available: true,
 
     srcs: [
         "lib/cache.c",
