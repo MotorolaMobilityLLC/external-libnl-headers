@@ -59,5 +59,9 @@ cc_library {
         "-D_GNU_SOURCE",
         "-DSYSCONFDIR=\"\\\"/etc/libnl\\\"\"",
     ],
+
+    sanitize: {
+        integer_overflow: true,
+    },
 }
 
