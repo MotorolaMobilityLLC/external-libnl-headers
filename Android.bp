@@ -41,6 +41,8 @@ cc_library {
     export_include_dirs: ["include"],
     cflags: [
         "-D_BSD_SOURCE",
+        "-Wall",
+        "-Werror",
         "-Wno-unused-parameter",
         "-Wno-sign-compare",
         "-Wno-missing-field-initializers",
