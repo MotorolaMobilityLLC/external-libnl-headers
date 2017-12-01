@@ -63,10 +63,5 @@ cc_library {
     sanitize: {
         integer_overflow: true,
     },
-    target: {
-        darwin: {
-            enabled: false,
-        },
-    },
 }
 
