@@ -10,6 +10,7 @@ third_party {
     value: "https://github.com/thom311/libnl.git"
   }
   version: "libnl3_5_0"
+  license_type: RESTRICTED
   last_upgrade_date {
     year: 2020
     month: 3
